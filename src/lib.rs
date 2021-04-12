@@ -10,9 +10,18 @@ pub trait LogErrResult<T, E: Debug> {
 }
 
 impl<T, E: Debug> LogErrResult<T, E> for Result<T, E> {
+
+    /**
+    `unwrap`s the `Result`, and outputs error message (in exact same style as `unwrap`) through `error!` as well.
+    */
+
     fn log_unwrap (self) -> T {
         self.map_err(|e| {error!("called `Result::unwrap()` on an `Err` value: {:?}", e); e}).unwrap()
     }
+
+    /**
+    `expect`s the `Result`, and outputs error message (in exact same style as `expect`) through `error!` as well.
+    */
 
     fn log_expect (self, msg: &str) -> T {
         self.map_err(|e| {error!("{}: {:?}", msg, e); e}).expect(msg)
