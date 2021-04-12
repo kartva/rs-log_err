@@ -11,11 +11,11 @@ pub trait LogErrResult<T, E: Debug> {
 
 impl<T, E: Debug> LogErrResult<T, E> for Result<T, E> {
     fn log_unwrap (self) -> T {
-        self.map_err(|e| error!("called `Result::unwrap()` on an `Err` value: {:?}", e)).unwrap()
+        self.map_err(|e| {error!("called `Result::unwrap()` on an `Err` value: {:?}", e); e}).unwrap()
     }
 
     fn log_expect (self, msg: &str) -> T {
-        self.map_err(|e| error!("{}: {:?}", msg, e)).expect(msg)
+        self.map_err(|e| {error!("{}: {:?}", msg, e); e}).expect(msg)
     }
 /*
     fn is_ok(&self) -> bool {
