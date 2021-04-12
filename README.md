@@ -1,3 +1,5 @@
+[![Crates.io](https://img.shields.io/crates/v/log_err?style=flat-square)](https://crates.io/crates/log_err)
+
 # Log_Err
 A small extension to the [log](https://crates.io/crates/log) crate, which provides two methods for `core::result::Result<T, E>` :
 
