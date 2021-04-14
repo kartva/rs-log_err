@@ -14,12 +14,12 @@ Example:
 ```rust
 let mut file = File::create("foo.txt").log_expect("Error creating file");
 ```
-```
-# Will output on your logger and on the main program as well:
 
-# Or however your logger formats messages
+```
+# Will output on your logger and on the main program as well
 
 [ERROR] Error creating file: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+
 
 # Main program panic'ing with same message
 
