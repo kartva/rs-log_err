@@ -15,7 +15,7 @@ Example:
 ```rust
 let mut file = File::create("foo.txt").log_expect("Error creating file");
 ```
-```
+```text
 # Will output on your logger and on the main program as well:
 
 # Or however your logger formats messages
