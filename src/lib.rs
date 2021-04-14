@@ -16,14 +16,10 @@ Example:
 let mut file = File::create("foo.txt").log_expect("Error creating file");
 ```
 ```text
-# Will output on your logger and on the main program as well:
-
-# Or however your logger formats messages
-
+# Error will be logged with the error! macro
 [ERROR] Error creating file: Os { code: 2, kind: NotFound, message: "No such file or directory" }
 
 # Main program panic'ing with same message
-
 thread 'main' panicked at 'Error creating file: Os { code: 2, kind: NotFound, message: "No such file or directory" }', test.rs:4:48
 ```
 */
