@@ -1,6 +1,6 @@
 /*!
 # Log_Err
-A small extension to the [log](https://crates.io/crates/log) crate, which provides two methods for `core::result::Result<T, E>` and `core:::
+A small extension to the [log](https://crates.io/crates/log) crate, which provides two methods for `core::result::Result<T, E>` and `core::option::Option<T>`
 
 `log_except` and `log_unwrap`, which invoke the `log::error!` macro (in case of `Result::Err`) in _addition_ to unwrapping/expecting the `Result`.
 
