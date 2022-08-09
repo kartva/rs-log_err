@@ -49,6 +49,7 @@ impl<T> LogErrOption<T> for Option<T> {
     `unwrap`s the `Option`, and outputs error message (in exact same style as `unwrap`) through `error!` as well.
     */
 
+    #[track_caller]
     fn log_unwrap (self) -> T {
         match self {
             Some (n) => n,
@@ -63,6 +64,7 @@ impl<T> LogErrOption<T> for Option<T> {
     `expect`s the `Option`, and outputs error message (in exact same style as `expect`) through `error!` as well.
     */
 
+    #[track_caller]
     fn log_expect (self, msg: &str) -> T {
         match self {
             Some (n) => n,
@@ -80,6 +82,7 @@ impl<T, E: Debug> LogErrResult<T, E> for Result<T, E> {
     `unwrap`s the `Result`, and outputs error message (in exact same style as `unwrap`) through `error!` as well.
     */
 
+    #[track_caller]
     fn log_unwrap (self) -> T {
         self.map_err(|e| {error!("called `Result::unwrap()` on an `Err` value: {:?}", e); e}).unwrap()
     }
@@ -88,6 +91,7 @@ impl<T, E: Debug> LogErrResult<T, E> for Result<T, E> {
     `expect`s the `Result`, and outputs error message (in exact same style as `expect`) through `error!` as well.
     */
 
+    #[track_caller]
     fn log_expect (self, msg: &str) -> T {
         self.map_err(|e| {error!("{}: {:?}", msg, e); e}).expect(msg)
     }
