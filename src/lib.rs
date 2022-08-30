@@ -103,7 +103,7 @@ mod test {
     
     use simplelog::SimpleLogger;
 
-    static mut LOGGER_SET_UP: bool = false;
+    static INIT: std::sync::Once = std::sync::Once::new();
 
     fn setup_logger () {
         SimpleLogger::init(simplelog::LevelFilter::Debug, simplelog::Config::default()).unwrap();
@@ -112,7 +112,7 @@ mod test {
     #[test]
     #[should_panic(expected = "called `Result::unwrap()` on an `Err` value: \"a wild error has appeared!\"")]
     fn test_log_unwrap () {
-        unsafe {if !LOGGER_SET_UP {setup_logger(); LOGGER_SET_UP = true;}}
+        INIT.call_once(setup_logger);
 
         Result::<(), &str>::Err("a wild error has appeared!").log_unwrap();
     }
@@ -120,7 +120,7 @@ mod test {
     #[test]
     #[should_panic(expected = "A wild error SHOULD appear")]
     fn test_option_log_expect () {
-        unsafe {if !LOGGER_SET_UP {setup_logger(); LOGGER_SET_UP = true;}}
+        INIT.call_once(setup_logger);
 
         Option::<()>::None.log_expect("A wild error SHOULD appear");
     }
@@ -128,7 +128,7 @@ mod test {
     #[test]
     #[should_panic(expected = "called `Option::unwrap()` on a `None` value")]
     fn test_option_log_unwrap () {
-        unsafe {if !LOGGER_SET_UP {setup_logger(); LOGGER_SET_UP = true;}}
+        INIT.call_once(setup_logger);
 
         Option::<()>::None.log_unwrap();
     }
